@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { Mail, Linkedin, MessageCircle, Github, ArrowUpRight } from "lucide-react";
+import { Mail, MessageCircle, ArrowUpRight } from "lucide-react";
 
 function useLocalTime() {
   const [t, setT] = useState("");
@@ -32,9 +32,9 @@ const links = [
 
 const socials = [
   { label: "Email", href: "mailto:contact@example.com", Icon: Mail },
-  { label: "LinkedIn", href: "#", Icon: Linkedin },
+  // { label: "LinkedIn", href: "#", Icon: Linkedin },
   { label: "WhatsApp", href: "#", Icon: MessageCircle },
-  { label: "GitHub", href: "#", Icon: Github },
+  // { label: "GitHub", href: "#", Icon: Github },
 ];
 
 export function Footer() {

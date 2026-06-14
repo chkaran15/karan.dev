@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { AnimatedButton } from "../animate/AnimateButton";
 
 const links = [
   { label: "Home", href: "#home" },
@@ -33,31 +35,30 @@ export function Navbar() {
           }`}
       >
         <nav className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-6 md:h-20 md:px-10">
-          <a href="#home" className="flex items-center gap-2 font-display text-2xl tracking-tight">
+          <Link href="/" className="flex items-center gap-2 font-display text-2xl tracking-tight">
             <span className="text-accent">✺</span>
             <span>Karan</span>
-          </a>
+          </Link>
 
           <ul className="hidden items-center gap-10 md:flex">
             {links.map((l) => (
               <li key={l.href}>
-                <a
+                <Link
                   href={l.href}
                   className="group relative text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {l.label}
                   <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
 
-          <a
-            href="#footer"
-            className="hidden items-center gap-2 rounded-full border border-border bg-secondary/40 px-5 py-2.5 text-xs uppercase tracking-[0.18em] transition-all hover:border-accent hover:bg-accent hover:text-accent-foreground md:inline-flex"
-          >
-            Contact <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
+          <div className="hidden md:block">
+            <AnimatedButton href="/contact" variant="outline">
+              Let&apos;s talk
+            </AnimatedButton>
+          </div>
 
           <button
             aria-label="Toggle menu"
