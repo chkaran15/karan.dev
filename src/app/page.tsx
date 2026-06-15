@@ -9,6 +9,7 @@ import { Marquee } from "@/components/sharable/Marquee";
 import { Services } from "@/components/portfolio/Services";
 import { Works } from "@/components/portfolio/Works";
 import { Stats } from "@/components/portfolio/Stats";
+import { TimelineSection } from "@/components/portfolio/TimelineSection";
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });
@@ -30,6 +31,7 @@ export default async function Home() {
         <Services />
         <Works />
         <Experience />
+        <TimelineSection />
         <FooterMarquee />
       </main>
     </HydrateClient >
