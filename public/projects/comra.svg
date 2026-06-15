@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Comra 3D visualization scene</title>
+  <desc id="desc">A dark 3D visualization environment with luminous violet geometry and premium gold measurement lines.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#05050f"/>
+      <stop offset="0.5" stop-color="#0d1028"/>
+      <stop offset="1" stop-color="#171337"/>
+    </linearGradient>
+    <linearGradient id="faceA" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="faceB" x1="0" x2="1" y1="1" y2="0">
+      <stop offset="0" stop-color="#252545"/>
+      <stop offset="1" stop-color="#111122"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="0" stdDeviation="18" flood-color="#8b5cf6" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <g stroke="#f4f4f5" stroke-width="1" opacity="0.16">
+    <path d="M0 690h1200M80 620h1040M160 550h880M240 480h720"/>
+    <path d="M128 900 534 120M342 900 650 120M558 900 766 120M774 900 882 120M990 900 998 120"/>
+  </g>
+  <g transform="translate(400 178)" filter="url(#glow)">
+    <path d="M210 0 420 122v244L210 488 0 366V122Z" fill="url(#faceB)" stroke="#8b5cf6" stroke-width="3"/>
+    <path d="M210 0 420 122 210 244 0 122Z" fill="url(#faceA)" opacity="0.92"/>
+    <path d="M210 244 420 122v244L210 488Z" fill="#3b82f6" opacity="0.55"/>
+    <path d="M0 122 210 244v244L0 366Z" fill="#111122"/>
+  </g>
+  <g fill="none" stroke="#f5d28a" stroke-width="4" stroke-linecap="round" opacity="0.86">
+    <path d="M170 202h184"/>
+    <path d="M846 612h190"/>
+    <path d="M184 210v126"/>
+    <path d="M1018 488v126"/>
+  </g>
+  <circle cx="356" cy="202" r="8" fill="#f5d28a"/>
+  <circle cx="846" cy="612" r="8" fill="#f5d28a"/>
+</svg>

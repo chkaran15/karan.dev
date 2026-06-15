@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">VexLogic AI interface study</title>
+  <desc id="desc">A premium abstract interface composition with violet panels, gold signals, and layered assistant data streams.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#070717"/>
+      <stop offset="0.48" stop-color="#171337"/>
+      <stop offset="1" stop-color="#090916"/>
+    </linearGradient>
+    <radialGradient id="violet" cx="28%" cy="20%" r="62%">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.8"/>
+      <stop offset="0.62" stop-color="#8b5cf6" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gold" cx="78%" cy="72%" r="48%">
+      <stop offset="0" stop-color="#f5d28a" stop-opacity="0.72"/>
+      <stop offset="0.55" stop-color="#d6a756" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#d6a756" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="20" stdDeviation="26" flood-color="#000000" flood-opacity="0.36"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect width="1200" height="900" fill="url(#violet)"/>
+  <rect width="1200" height="900" fill="url(#gold)"/>
+  <g opacity="0.18" stroke="#f4f4f5" stroke-width="1">
+    <path d="M90 160H1110M90 310H1110M90 460H1110M90 610H1110M90 760H1110"/>
+    <path d="M210 80V820M390 80V820M570 80V820M750 80V820M930 80V820"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="180" y="150" width="840" height="560" rx="22" fill="#111122" stroke="#34345e"/>
+    <rect x="224" y="196" width="330" height="110" rx="16" fill="#f4f4f5" opacity="0.94"/>
+    <rect x="592" y="196" width="202" height="110" rx="16" fill="#8b5cf6"/>
+    <rect x="820" y="196" width="154" height="110" rx="16" fill="#d6a756"/>
+    <rect x="224" y="350" width="750" height="18" rx="9" fill="#8b5cf6" opacity="0.7"/>
+    <rect x="224" y="402" width="620" height="18" rx="9" fill="#f4f4f5" opacity="0.22"/>
+    <rect x="224" y="454" width="704" height="18" rx="9" fill="#f4f4f5" opacity="0.16"/>
+    <rect x="224" y="528" width="245" height="106" rx="16" fill="#18182e" stroke="#252545"/>
+    <rect x="500" y="528" width="245" height="106" rx="16" fill="#18182e" stroke="#252545"/>
+    <rect x="776" y="528" width="198" height="106" rx="16" fill="#18182e" stroke="#252545"/>
+    <circle cx="344" cy="580" r="26" fill="#8b5cf6"/>
+    <circle cx="624" cy="580" r="26" fill="#3b82f6"/>
+    <circle cx="876" cy="580" r="26" fill="#f5d28a"/>
+  </g>
+</svg>

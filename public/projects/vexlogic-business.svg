@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">VexLogic Business operations dashboard</title>
+  <desc id="desc">Layered business platform panels arranged like architectural slabs with violet and gold highlights.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="1" y2="0">
+      <stop offset="0" stop-color="#060614"/>
+      <stop offset="0.54" stop-color="#111122"/>
+      <stop offset="1" stop-color="#1c1742"/>
+    </linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#000000" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="1000" cy="110" r="290" fill="#8b5cf6" opacity="0.28"/>
+  <circle cx="190" cy="780" r="250" fill="#d6a756" opacity="0.2"/>
+  <g transform="translate(132 126)" filter="url(#shadow)">
+    <rect x="0" y="0" width="936" height="648" rx="20" fill="#f8f7ff"/>
+    <rect x="44" y="48" width="186" height="552" rx="16" fill="#11111a"/>
+    <rect x="274" y="48" width="286" height="176" rx="16" fill="#7c3aed"/>
+    <rect x="592" y="48" width="300" height="176" rx="16" fill="#11111a"/>
+    <rect x="274" y="268" width="618" height="84" rx="14" fill="#e6e1f5"/>
+    <rect x="274" y="392" width="182" height="208" rx="16" fill="#11111a"/>
+    <rect x="488" y="392" width="190" height="208" rx="16" fill="#3b82f6"/>
+    <rect x="710" y="392" width="182" height="208" rx="16" fill="#d6a756"/>
+    <path d="M320 156h194M320 184h132M636 118h202M636 150h154M636 184h188" stroke="#f4f4f5" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+    <path d="M318 310h512" stroke="#11111a" stroke-width="14" stroke-linecap="round" opacity="0.52"/>
+    <path d="M86 118h94M86 176h94M86 234h68M86 520h94" stroke="#f4f4f5" stroke-width="12" stroke-linecap="round" opacity="0.62"/>
+  </g>
+</svg>
