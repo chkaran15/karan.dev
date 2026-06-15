@@ -52,23 +52,20 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-primary mb-10 flex items-center gap-3 text-xs tracking-[0.25em] uppercase"
+          className="text-primary my-10  flex items-center gap-3 text-xs tracking-[0.25em] uppercase"
         >
           <span className="live-dot bg-primary inline-block h-1.5 w-1.5 rounded-full shadow-[0_0_14px_var(--glow)]" />
           Hello! — Portfolio 2025 © Edition
         </motion.div>
 
-        <h1 className="font-display text-[14vw] leading-[0.9] tracking-[-0.02em] md:text-[10vw]">
+        <h1 className="font-display pb-14 text-[14vw] leading-[0.9] tracking-[-0.02em] md:text-[10vw]">
           <Line i={0}>Hi! I&apos;m Karan</Line>
           <Line i={1}>
-            <span className="text-muted-foreground">Full-stack</span> Developer
-          </Line>
-          <Line i={2}>
-            <span className="text-accent italic">UI &amp; UX</span> Designer.
+            <span className="text-accent italic">Full-Stack</span> Developer.
           </Line>
         </h1>
 
-        <div className="mt-14 grid gap-10 md:mt-20 md:grid-cols-[1fr_auto_1fr]">
+        <div className="mt-14 flex w-full flex-col gap-10 md:mt-20 md:flex-row ">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,6 +76,25 @@ export function Hero() {
             immersive digital experiences that merge creativity with engineering
             precision.
           </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            className="text-muted-foreground ml-auto max-w-md text-sm leading-relaxed md:text-base"
+          >
+            I specialize in SaaS platforms, AI-driven products, and interactive
+            3D web experiences using Next.js, Node.js, and Three.js.
+          </motion.p>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.6, duration: 0.8 }}
+          className="text-muted-foreground mt-16 flex items-center justify-between text-[10px] tracking-[0.3em] uppercase md:mt-24"
+        >
+          <span>Karan Chaudhary</span>
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -100,25 +116,6 @@ export function Hero() {
               <ArrowDown className="text-primary h-4 w-4" />
             </motion.div>
           </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
-            className="text-muted-foreground ml-auto max-w-md text-sm leading-relaxed md:text-base"
-          >
-            I specialize in SaaS platforms, AI-driven products, and interactive
-            3D web experiences using Next.js, Node.js, and Three.js.
-          </motion.p>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
-          className="text-muted-foreground mt-16 flex items-center justify-between text-[10px] tracking-[0.3em] uppercase md:mt-24"
-        >
-          <span>Karan Chaudhary</span>
           <span>v.2.5 — 2025</span>
         </motion.div>
       </motion.div>

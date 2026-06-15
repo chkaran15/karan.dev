@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 interface MagneticButtonProps {
@@ -59,14 +60,20 @@ export function MagneticButton({
             style={{ x: sx, y: sy }}
             className="inline-flex"
         >
-            <Comp
-                {...(href ? { href } : {})}
-                onClick={onClick}
-                aria-label={ariaLabel}
-                className={cn("inline-flex items-center justify-center", className)}
-            >
-                {children}
-            </Comp>
+            {as === "a" && href ? (
+                <Link href={href} aria-label={ariaLabel} onClick={onClick} className={cn("inline-flex items-center justify-center", className)}>
+                    {children}
+                </Link>
+            ) : (
+                <Comp
+                    {...(href ? { href } : {})}
+                    onClick={onClick}
+                    aria-label={ariaLabel}
+                    className={cn("inline-flex items-center justify-center", className)}
+                >
+                    {children}
+                </Comp>
+            )}
         </motion.div>
     );
 }
