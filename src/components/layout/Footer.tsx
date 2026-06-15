@@ -120,7 +120,9 @@ export function Footer() {
       <div aria-hidden className="px-2 pb-8 select-none md:pb-12">
         <h3 className="font-display text-foreground/95 text-[28vw] leading-[0.8] tracking-[-0.04em]">
           Karan
+          <span className="text-primary text-[10vw]">✺</span>
         </h3>
+
       </div>
     </footer>
   );

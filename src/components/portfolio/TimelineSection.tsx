@@ -3,7 +3,7 @@ import { timelineItems } from "@/data/timeline";
 
 export function TimelineSection() {
   return (
-    <section id="timeline" className="mx-auto max-w-[1600px] px-6 py-32 md:px-10 md:py-48">
+    <section id="timeline" className="mx-auto max-w-[1600px] px-6 py-32 md:px-10 md:py-48 overflow-hidden">
       <div className="mb-16 flex flex-col gap-4">
         <div className="text-primary text-xs tracking-[0.3em] uppercase">
           ✺ Experience

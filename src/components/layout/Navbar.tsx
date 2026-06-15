@@ -12,9 +12,10 @@ import { ThemeToggle } from "../theme/ThemeToggle";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Work", href: "/work" },
-  { label: "Process", href: "/process" },
+  { label: "Works", href: "/work" },
+  { label: "Articles", href: "/articles" },
   { label: "Profile", href: "/profile" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -113,9 +114,14 @@ export function Navbar() {
             className="fixed inset-0 z-60 bg-black text-white md:hidden dark:bg-white dark:text-black"
           >
             <div className="flex items-center justify-between px-5 py-5">
-              <span className="font-display text-lg font-semibold">
-                Karan<span className="text-premium-light">.</span>portfolio
-              </span>
+              <Link
+                href="/"
+                className="font-display flex items-center gap-2 text-2xl tracking-tight"
+              >
+                <span className="text-primary">✺</span>
+                <span>Karan</span>
+              </Link>
+
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"
