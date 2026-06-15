@@ -1,124 +1,163 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { AnimatedButton } from "../animate/AnimateButton";
+import { ease } from "@/lib/animations";
 import { ThemeToggle } from "../theme/ThemeToggle";
 
-const links = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Works", href: "#works" },
-  { label: "Contact", href: "#footer" },
+const NAV_LINKS = [
+    { label: "Home", href: "/" },
+    { label: "Work", href: "/work" },
+    { label: "Process", href: "/process" },
+    { label: "Profile", href: "/profile" },
 ];
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 24);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
 
-  return (
-    <>
-      <motion.header
-        initial={{ y: -40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-background/60 border-border border-b backdrop-blur-xl"
-            : "bg-transparent"
-        }`}
-      >
-        <nav className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-6 md:h-20 md:px-10">
-          <Link
-            href="/"
-            className="font-display flex items-center gap-2 text-2xl tracking-tight"
-          >
-            <span className="text-accent">✺</span>
-            <span>Karan</span>
-          </Link>
+    useEffect(() => {
+        document.body.style.overflow = open ? "hidden" : "";
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [open]);
 
-          <ul className="hidden items-center gap-10 md:flex">
-            {links.map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className="group text-muted-foreground hover:text-foreground relative text-xs tracking-[0.2em] uppercase transition-colors"
-                >
-                  {l.label}
-                  <span className="bg-accent absolute -bottom-1 left-0 h-px w-0 transition-all duration-300 group-hover:w-full" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <div className="hidden items-center gap-3 md:flex">
-            <ThemeToggle />
-            <AnimatedButton href="/contact" variant="outline">
-              Let&apos;s talk
-            </AnimatedButton>
-          </div>
-
-          <div className="flex items-center gap-2 md:hidden">
-            <ThemeToggle />
-            <button
-              type="button"
-              aria-label="Toggle menu"
-              aria-expanded={open}
-              onClick={() => setOpen((v) => !v)}
-              className="border-border bg-background/70 hover:border-accent/50 focus-visible:ring-ring focus-visible:ring-offset-background rounded-full border p-2.5 backdrop-blur-xl transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+    return (
+        <>
+            <motion.header
+                initial={{ y: -40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: ease.expo, delay: 0.2 }}
+                className="fixed inset-x-0 top-0 z-50"
             >
-              {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-            </button>
-          </div>
-        </nav>
-      </motion.header>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="bg-background fixed inset-0 z-40 md:hidden"
-          >
-            <div className="flex h-full flex-col justify-between px-6 pt-24 pb-12">
-              <ul className="flex flex-col gap-6">
-                {links.map((l, i) => (
-                  <motion.li
-                    key={l.href}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.05 * i, duration: 0.4 }}
-                  >
-                    <a
-                      href={l.href}
-                      onClick={() => setOpen(false)}
-                      className="font-display text-5xl tracking-tight"
+                <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-6 md:h-20 md:px-10">
+                    <Link
+                        href="/"
+                        className="font-display flex items-center gap-2 text-2xl tracking-tight"
                     >
-                      {l.label}
-                    </a>
-                  </motion.li>
-                ))}
-              </ul>
-              <div className="text-muted-foreground flex items-center justify-between gap-4 text-xs tracking-[0.2em] uppercase">
-                <span>Based in Earth</span>
-                <span className="flex items-center gap-2">
-                  <span className="live-dot bg-accent inline-block h-1.5 w-1.5 rounded-full" />
-                  Available
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
-  );
+                        <span className="text-accent">✺</span>
+                        <span>Karan</span>
+                    </Link>
+
+                    <nav className="hidden items-center gap-9 md:flex">
+                        {NAV_LINKS.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className="link-underline text-foreground/80 hover:text-foreground text-sm transition-colors"
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </nav>
+
+                    <div className="hidden items-center gap-3 md:flex">
+                        <ThemeToggle />
+                        <AnimatedButton href="/contact" variant="outline">
+                            Let&apos;s talk
+                        </AnimatedButton>
+                    </div>
+
+                    <div className="flex items-center gap-2 md:hidden">
+                        <ThemeToggle />
+                        <button
+                            type="button"
+                            aria-label="Toggle menu"
+                            aria-expanded={open}
+                            onClick={() => setOpen((v) => !v)}
+                            className="border-border bg-background/70 hover:border-accent/50 focus-visible:ring-ring focus-visible:ring-offset-background rounded-full border p-2.5 backdrop-blur-xl transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                        >
+                            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+                        </button>
+                    </div>
+                </div>
+            </motion.header>
+
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ clipPath: "circle(0% at 90% 6%)" }}
+                        animate={{ clipPath: "circle(150% at 90% 6%)" }}
+                        exit={{ clipPath: "circle(0% at 90% 6%)" }}
+                        transition={{ duration: 0.7, ease: ease.inOut }}
+                        className="bg-primary text-primary-foreground fixed inset-0 z-60 md:hidden"
+                    >
+                        <div className="flex items-center justify-between px-5 py-5">
+                            <span className="font-display text-lg font-semibold">
+                                Melina<span className="text-clay">.</span>architect
+                            </span>
+                            <button
+                                onClick={() => setOpen(false)}
+                                aria-label="Close menu"
+                                className="border-primary-foreground/30 inline-flex h-10 w-10 items-center justify-center rounded-full border"
+                            >
+                                <X className="h-5 w-5" />
+                            </button>
+                        </div>
+
+                        <motion.nav
+                            initial="hidden"
+                            animate="show"
+                            variants={{
+                                show: {
+                                    transition: { staggerChildren: 0.08, delayChildren: 0.15 },
+                                },
+                            }}
+                            className="flex flex-col gap-2 px-5 pt-10"
+                        >
+                            {NAV_LINKS.map((link) => (
+                                <motion.a
+                                    key={link.href}
+                                    href={link.href}
+                                    onClick={() => setOpen(false)}
+                                    variants={{
+                                        hidden: { y: 40, opacity: 0 },
+                                        show: {
+                                            y: 0,
+                                            opacity: 1,
+                                            transition: { duration: 0.6, ease: ease.expo },
+                                        },
+                                    }}
+                                    className="border-primary-foreground/15 font-display border-b py-4 text-4xl font-medium tracking-tight"
+                                >
+                                    {link.label}
+                                </motion.a>
+                            ))}
+                            <motion.div
+                                variants={{
+                                    hidden: { y: 20, opacity: 0 },
+                                    show: {
+                                        y: 0,
+                                        opacity: 1,
+                                        transition: { duration: 0.6, ease: ease.expo },
+                                    },
+                                }}
+                                className="pt-10"
+                            >
+                                <Link
+                                    href="/contact"
+                                    onClick={() => setOpen(false)}
+                                    className="bg-clay text-clay-foreground inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium"
+                                >
+                                    Let&apos;s talk
+                                </Link>
+                            </motion.div>
+                        </motion.nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
+    );
 }
