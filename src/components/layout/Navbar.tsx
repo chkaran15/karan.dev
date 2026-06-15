@@ -142,10 +142,8 @@ export function Navbar() {
               className="flex flex-col gap-2 px-5 pt-10"
             >
               {NAV_LINKS.map((link) => (
-                <motion.a
+                <motion.div
                   key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
                   variants={{
                     hidden: { y: 40, opacity: 0 },
                     show: {
@@ -156,8 +154,14 @@ export function Navbar() {
                   }}
                   className="font-display hover:text-premium-light border-b border-white/15 py-4 text-4xl font-medium tracking-tight transition-colors dark:border-black/15"
                 >
-                  {link.label}
-                </motion.a>
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="block w-full"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
               <motion.div
                 variants={{
