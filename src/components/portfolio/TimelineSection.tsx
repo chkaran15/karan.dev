@@ -7,8 +7,8 @@ export function TimelineSection() {
       id="timeline"
       className="bg-background relative px-5 py-24 sm:px-8 sm:py-32 lg:py-40"
     >
-      <div className="mx-auto max-w-6xl">
-        <header className="mb-16 max-w-2xl sm:mb-24">
+      <div className="mx-auto">
+        <header className="mb-16 sm:mb-24">
           <span className="text-primary font-mono text-xs tracking-[0.22em] uppercase">
             The Path
           </span>

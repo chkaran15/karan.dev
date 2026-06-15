@@ -70,7 +70,7 @@ export function CurvedTimeline({ items }: CurvedTimelineProps) {
   d += ` L ${cx} ${vbHeight}`;
 
   return (
-    <div ref={ref} className="relative mx-auto w-full max-w-6xl">
+    <div ref={ref} className="relative mx-auto w-full ">
       {/* SVG defs: brush texture */}
       <svg aria-hidden width="0" height="0" className="absolute">
         <defs>
@@ -111,7 +111,7 @@ export function CurvedTimeline({ items }: CurvedTimelineProps) {
           d={d}
           fill="none"
           stroke="var(--color-border)"
-          strokeWidth={2}
+          strokeWidth={0}
           strokeLinecap="round"
         />
         <motion.path
