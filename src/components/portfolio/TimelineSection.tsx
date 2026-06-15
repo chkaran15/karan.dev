@@ -3,28 +3,18 @@ import { timelineItems } from "@/data/timeline";
 
 export function TimelineSection() {
   return (
-    <section
-      id="timeline"
-      className="bg-background relative px-5 py-24 sm:px-8 sm:py-32 lg:py-40"
-    >
-      <div className="mx-auto">
-        <header className="mb-16 sm:mb-24">
-          <span className="text-primary font-mono text-xs tracking-[0.22em] uppercase">
-            The Path
-          </span>
-          <h2 className="text-foreground mt-4 font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-            A timeline of work,
-            <br />
-            woven together.
-          </h2>
-          <p className="text-muted-foreground mt-6 max-w-xl text-base leading-relaxed sm:text-lg">
-            A curated sequence of teams, products, and ideas — each shaping the
-            craft, every chapter drawing the line that follows.
-          </p>
-        </header>
-
-        <CurvedTimeline items={timelineItems} />
+    <section id="timeline" className="mx-auto max-w-[1600px] px-6 py-32 md:px-10 md:py-48">
+      <div className="mb-16 flex flex-col gap-4">
+        <div className="text-primary text-xs tracking-[0.3em] uppercase">
+          ✺ Experience
+        </div>
+        <h2 className="font-display max-w-2xl text-5xl tracking-tight md:text-7xl">
+          Explore my <span className="text-accent italic">journey</span> and the
+          technologies that define my craft.
+        </h2>
       </div>
+
+      <CurvedTimeline items={timelineItems} />
     </section>
   );
 }

@@ -2,7 +2,6 @@
 import { getSession } from "@/server/better-auth/server";
 import { api, HydrateClient } from "@/trpc/server";
 import { About } from "@/components/portfolio/About";
-import { Experience } from "@/components/portfolio/Experience";
 import { FooterMarquee } from "@/components/layout/FooterMarquee";
 import { Hero } from "@/components/portfolio/Hero";
 import { Marquee } from "@/components/sharable/Marquee";
@@ -30,7 +29,6 @@ export default async function Home() {
         <Stats />
         <Services />
         <Works />
-        <Experience />
         <TimelineSection />
         <FooterMarquee />
       </main>
