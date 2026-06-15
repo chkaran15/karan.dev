@@ -85,8 +85,17 @@ export function CurvedTimeline({ items }: CurvedTimelineProps) {
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" />
           </filter>
           <linearGradient id="brushGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="var(--color-accent-clay)" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="var(--color-accent-clay)" stopOpacity="0.75" />
+            <stop
+              offset="0%"
+              stopColor="var(--primary-violet)"
+              stopOpacity="0.95"
+            />
+            <stop
+              offset="58%"
+              stopColor="var(--primary-blue)"
+              stopOpacity="0.82"
+            />
+            <stop offset="100%" stopColor="var(--premium)" stopOpacity="0.9" />
           </linearGradient>
         </defs>
       </svg>
@@ -96,7 +105,7 @@ export function CurvedTimeline({ items }: CurvedTimelineProps) {
         aria-hidden
         viewBox={`0 0 ${VB_WIDTH} ${vbHeight}`}
         preserveAspectRatio="none"
-        className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-[min(100%,900px)] -translate-x-1/2 md:block"
+        className="pointer-events-none absolute top-0 left-1/2 hidden h-full w-[min(100%,900px)] -translate-x-1/2 md:block"
       >
         <path
           d={d}
@@ -108,8 +117,8 @@ export function CurvedTimeline({ items }: CurvedTimelineProps) {
         <motion.path
           d={d}
           fill="none"
-          stroke="var(--color-accent-clay)"
-          strokeOpacity={0.18}
+          stroke="var(--premium)"
+          strokeOpacity={0.16}
           strokeWidth={24}
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -129,7 +138,7 @@ export function CurvedTimeline({ items }: CurvedTimelineProps) {
         <motion.path
           d={d}
           fill="none"
-          stroke="var(--color-accent-clay)"
+          stroke="var(--primary-violet)"
           strokeOpacity={0.9}
           strokeWidth={4}
           strokeLinecap="round"
@@ -140,12 +149,12 @@ export function CurvedTimeline({ items }: CurvedTimelineProps) {
       {/* Mobile brush stripe */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-5 top-0 h-full w-px bg-border md:hidden"
+        className="bg-border pointer-events-none absolute top-0 left-5 h-full w-px md:hidden"
       />
       <motion.div
         aria-hidden
         style={{ scaleY: pathLength, transformOrigin: "top" }}
-        className="pointer-events-none absolute left-[18px] top-0 h-full w-[6px] rounded-full bg-accent-clay/85 md:hidden"
+        className="accent-gradient pointer-events-none absolute top-0 left-[18px] h-full w-[6px] rounded-full md:hidden"
       />
 
       <ol className="relative space-y-16 sm:space-y-20 md:space-y-0">
@@ -159,10 +168,11 @@ export function CurvedTimeline({ items }: CurvedTimelineProps) {
               style={{ ["--row" as string]: `${ROW_HEIGHT}px` }}
             >
               <div
-                className={`pl-12 md:pl-0 ${side === "left"
-                  ? "md:col-start-1 md:pr-10"
-                  : "md:col-start-3 md:pl-10"
-                  }`}
+                className={`pl-12 md:pl-0 ${
+                  side === "left"
+                    ? "md:col-start-1 md:pr-10"
+                    : "md:col-start-3 md:pl-10"
+                }`}
               >
                 <TimelineCard
                   item={item}
@@ -209,10 +219,14 @@ function DebugRow({
   const localProgress = useTransform(progress, [start, end], [0, 1], {
     clamp: true,
   });
-  const widthPct = useTransform(localProgress, (v) => `${Math.round(v * 100)}%`);
+  const widthPct = useTransform(
+    localProgress,
+    (v) => `${Math.round(v * 100)}%`,
+  );
   const label = useTransform(
     localProgress,
-    (v) => `#${index} (${side}) p=${v.toFixed(2)} active@${activeAt.toFixed(2)}`,
+    (v) =>
+      `#${index} (${side}) p=${v.toFixed(2)} active@${activeAt.toFixed(2)}`,
   );
 
   return (
@@ -222,17 +236,17 @@ function DebugRow({
       {/* Activation range band */}
       <div className="absolute inset-x-0 top-1/2 h-10 -translate-y-1/2 border-y border-emerald-500/40 bg-emerald-500/5" />
       {/* Marker dot (debug only, since real dots removed) */}
-      <span className="absolute left-1/2 top-1/2 z-10 hidden h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-500 ring-2 ring-white md:block" />
+      <span className="absolute top-1/2 left-1/2 z-10 hidden h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-500 ring-2 ring-white md:block" />
       {/* Mobile marker */}
-      <span className="absolute left-[18px] top-1/2 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-500 ring-2 ring-white md:hidden" />
+      <span className="absolute top-1/2 left-[18px] z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-500 ring-2 ring-white md:hidden" />
       {/* Per-card progress bar */}
-      <div className="absolute left-2 right-2 top-1/2 mt-6 h-1 -translate-y-1/2 overflow-hidden rounded bg-black/10">
+      <div className="absolute top-1/2 right-2 left-2 mt-6 h-1 -translate-y-1/2 overflow-hidden rounded bg-black/10">
         <motion.div
           style={{ width: widthPct }}
           className="h-full bg-emerald-500"
         />
       </div>
-      <motion.div className="absolute left-2 top-1/2 mt-8 -translate-y-1/2 rounded bg-black/80 px-1.5 py-0.5 font-mono text-[10px] text-white">
+      <motion.div className="absolute top-1/2 left-2 mt-8 -translate-y-1/2 rounded bg-black/80 px-1.5 py-0.5 font-mono text-[10px] text-white">
         {label}
       </motion.div>
     </div>
@@ -250,7 +264,7 @@ function DebugHUD({
   useMotionValueEvent(progress, "change", (v) => setP(v));
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 w-72 rounded-lg border border-black/10 bg-white/95 p-3 font-mono text-[11px] text-black shadow-2xl backdrop-blur">
+    <div className="fixed right-4 bottom-4 z-50 w-72 rounded-lg border border-black/10 bg-white/95 p-3 font-mono text-[11px] text-black shadow-2xl backdrop-blur">
       <div className="mb-2 flex items-center justify-between">
         <strong className="text-fuchsia-600">TIMELINE DEBUG</strong>
         <span>{p.toFixed(3)}</span>
@@ -267,21 +281,23 @@ function DebugHUD({
           const start = Math.max(0, at - CARD_WINDOW);
           const end = Math.min(1, at + CARD_WINDOW);
           const local = Math.max(0, Math.min(1, (p - start) / (end - start)));
-          const state =
-            p < start ? "idle" : p > end ? "done" : "active";
+          const state = p < start ? "idle" : p > end ? "done" : "active";
           return (
             <li key={it.id} className="flex items-center gap-2">
               <span
-                className={`inline-block h-1.5 w-1.5 rounded-full ${state === "active"
-                  ? "bg-emerald-500"
-                  : state === "done"
-                    ? "bg-black/50"
-                    : "bg-black/20"
-                  }`}
+                className={`inline-block h-1.5 w-1.5 rounded-full ${
+                  state === "active"
+                    ? "bg-emerald-500"
+                    : state === "done"
+                      ? "bg-black/50"
+                      : "bg-black/20"
+                }`}
               />
               <span className="w-6 text-black/60">#{i}</span>
               <span className="w-10">{at.toFixed(2)}</span>
-              <span className="w-12">[{start.toFixed(2)}-{end.toFixed(2)}]</span>
+              <span className="w-12">
+                [{start.toFixed(2)}-{end.toFixed(2)}]
+              </span>
               <span className="ml-auto tabular-nums">{local.toFixed(2)}</span>
             </li>
           );

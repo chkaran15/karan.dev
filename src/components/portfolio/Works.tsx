@@ -4,10 +4,10 @@ import { useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
 const projects = [
-  { title: "VexLogic AI", category: "AI Assistant", hue: "260" },
-  { title: "VexLogic Business", category: "Business", hue: "200" },
-  { title: "Comra", category: "3D Visualisation", hue: "75" },
-  { title: "Superhost", category: "Property Booking", hue: "20" },
+  { title: "VexLogic AI", category: "AI Assistant" },
+  { title: "VexLogic Business", category: "Business" },
+  { title: "Comra", category: "3D Visualisation" },
+  { title: "Superhost", category: "Property Booking" },
 ];
 
 export function Works() {
@@ -23,7 +23,7 @@ export function Works() {
     >
       <div className="mb-16 grid gap-8 md:grid-cols-2 md:items-end">
         <div>
-          <div className="text-muted-foreground mb-4 text-xs tracking-[0.3em] uppercase">
+          <div className="text-primary mb-4 text-xs tracking-[0.3em] uppercase">
             ✺ Selected Works
           </div>
           <h2 className="font-display text-5xl tracking-tight md:text-7xl">
@@ -65,11 +65,11 @@ export function Works() {
           style={{
             background:
               hoveredProject !== null
-                ? `radial-gradient(circle at 30% 30%, oklch(0.78 0.16 ${hoveredProject.hue} / 0.7), oklch(0.18 0.02 ${hoveredProject.hue}))`
+                ? "radial-gradient(circle at 24% 24%, color-mix(in oklab, var(--primary-violet) 76%, transparent), transparent 58%), radial-gradient(circle at 78% 76%, color-mix(in oklab, var(--premium) 64%, transparent), transparent 56%), linear-gradient(135deg, color-mix(in oklab, var(--primary-blue) 64%, var(--background)), var(--card))"
                 : "transparent",
           }}
         >
-          <div className="font-display flex h-full items-end p-6 text-2xl">
+          <div className="font-display text-foreground flex h-full items-end p-6 text-2xl">
             {hoveredProject?.title ?? ""}
           </div>
         </motion.div>
@@ -92,12 +92,12 @@ export function Works() {
               <h3 className="font-display text-3xl tracking-tight transition-transform duration-500 group-hover:translate-x-3 md:text-6xl">
                 {p.title}
               </h3>
-              <span className="text-muted-foreground hidden text-xs tracking-[0.25em] uppercase md:block">
+              <span className="text-accent hidden text-xs tracking-[0.25em] uppercase md:block">
                 {p.category}
               </span>
               <ArrowUpRight className="text-muted-foreground group-hover:text-accent h-5 w-5 transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 md:h-6 md:w-6" />
             </div>
-            <span className="text-muted-foreground block pb-6 text-xs tracking-[0.25em] uppercase md:hidden">
+            <span className="text-accent block pb-6 text-xs tracking-[0.25em] uppercase md:hidden">
               {p.category}
             </span>
           </motion.a>

@@ -6,7 +6,14 @@ Karan Chaudhary's portfolio is a brand surface: design is part of the product. T
 
 ## Theme Strategy
 
-Dark theme is the default direction. It should feel near-black, cinematic, technical, and warm through controlled amber accents. Light theme must feel equally designed: warm off-white backgrounds, deep charcoal text, ivory surfaces, soft borders, and subtle warm glow. It should not become a plain white SaaS page.
+Dark theme is the default direction. It should feel near-black, cinematic, technical, and premium through controlled Royal Violet accents with restrained premium gold highlights. Light theme must feel equally designed: soft violet-tinted off-white backgrounds, deep ink text, white surfaces, soft violet borders, crisp violet/blue interaction color, and accessible gold emphasis. It should not become a plain white SaaS page.
+
+The brand palette is:
+
+- Dark: `--background: #060614`, `--foreground: #f4f4f5`, `--primary: #8b5cf6`, `--primary-violet: #8b5cf6`, `--primary-blue: #3b82f6`, `--premium: #d6a756`, `--premium-light: #f5d28a`, `--card: #111122`, `--border: #252545`, `--muted: #a1a1aa`.
+- Light: `--background: #f8f7ff`, `--foreground: #11111a`, `--primary: #7c3aed`, `--primary-violet: #8b5cf6`, `--primary-blue: #3b82f6`, `--premium: #d6a756`, `--premium-light: #f5d28a`, `--card: #ffffff`, `--border: #e6e1f5`, `--muted: #6b7280`.
+
+Use `--primary`, `--primary-violet`, and `--primary-blue` for primary buttons, active navigation, animated underlines, section labels, important numbers, icons, scroll indicators, preview gradients, and cursor/loader motion. Use `--premium`, `--premium-light`, and `--accent` for premium highlights: italic emphasis words, hover arrows, project/category tags, plus signs, timeline tags, and selective borders. In light mode, gold text should use the accessible `--accent`/`--premium-foreground` role rather than raw `--premium`.
 
 All colors are tokenized in `src/styles/globals.css` with OKLCH CSS variables. Components should use Tailwind token classes such as `bg-background`, `text-foreground`, `text-muted-foreground`, `bg-card`, `border-border`, `bg-accent`, `text-accent`, and `ring-ring`. Avoid hardcoded random color values in components unless they are mapped to tokens first.
 

@@ -26,30 +26,30 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
 
 export function Stats() {
   return (
-    <section className="mx-auto max-w-[1600px] border-t border-border px-6 py-24 md:px-10 md:py-32">
+    <section className="border-border mx-auto max-w-[1600px] border-t px-6 py-24 md:px-10 md:py-32">
       <div className="grid gap-12 md:grid-cols-3">
         <div>
-          <div className="font-display text-7xl tracking-tight md:text-9xl">
+          <div className="font-display text-primary text-7xl tracking-tight md:text-9xl">
             <Counter to={3} />
             <span className="text-accent">+</span>
           </div>
-          <div className="mt-4 text-sm uppercase tracking-[0.25em] text-muted-foreground">
+          <div className="text-muted-foreground mt-4 text-sm tracking-[0.25em] uppercase">
             Years of Experience
           </div>
         </div>
         <div>
-          <div className="font-display text-7xl tracking-tight md:text-9xl">
+          <div className="font-display text-primary text-7xl tracking-tight md:text-9xl">
             <Counter to={40} />
             <span className="text-accent">+</span>
           </div>
-          <div className="mt-4 text-sm uppercase tracking-[0.25em] text-muted-foreground">
+          <div className="text-muted-foreground mt-4 text-sm tracking-[0.25em] uppercase">
             Projects Completed
           </div>
         </div>
         <div className="flex items-end">
-          <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-            A blend of craft, code and care — shipped with engineering precision and a designer's
-            eye for the smallest detail.
+          <p className="text-muted-foreground max-w-xs text-sm leading-relaxed">
+            A blend of craft, code and care — shipped with engineering precision
+            and a designer&apos;s eye for the smallest detail.
           </p>
         </div>
       </div>
