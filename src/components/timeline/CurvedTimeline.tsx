@@ -9,7 +9,7 @@ import {
   useTransform,
   type MotionValue,
 } from "motion/react";
-import { TimelineCard } from "./TimelineCard";
+import { TimelineCard, TIMELINE_CARD_REVEAL_WINDOW } from "./TimelineCard";
 import { PerfHUD } from "./PerfHUD";
 import type { TimelineItem } from "@/data/timeline";
 
@@ -19,7 +19,7 @@ interface CurvedTimelineProps {
 
 const ROW_HEIGHT = 380;
 const VB_WIDTH = 1000;
-const CARD_WINDOW = 0.08; // must match TimelineCard
+const CARD_WINDOW = TIMELINE_CARD_REVEAL_WINDOW;
 
 export function CurvedTimeline({ items }: CurvedTimelineProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -70,7 +70,7 @@ export function CurvedTimeline({ items }: CurvedTimelineProps) {
   d += ` L ${cx} ${vbHeight}`;
 
   return (
-    <div ref={ref} className="relative mx-auto w-full ">
+    <div ref={ref} className="relative mx-auto w-full">
       {/* SVG defs: brush texture */}
       <svg aria-hidden width="0" height="0" className="absolute">
         <defs>

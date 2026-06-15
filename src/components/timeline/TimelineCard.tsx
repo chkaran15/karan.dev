@@ -15,9 +15,10 @@ interface TimelineCardProps {
   activeAt: number;
 }
 
-// Smooth ease-in-out curve (close to expo.inOut) for natural activation
-const easeInOutQuint = cubicBezier(0.83, 0, 0.17, 1);
+export const TIMELINE_CARD_REVEAL_WINDOW = 0.12;
+
 const easeOutExpo = cubicBezier(0.16, 1, 0.3, 1);
+const easeOutQuint = cubicBezier(0.22, 1, 0.36, 1);
 
 export function TimelineCard({
   item,
@@ -26,37 +27,74 @@ export function TimelineCard({
   activeAt,
 }: TimelineCardProps) {
   const reduce = useReducedMotion();
-  // Enter from the OPPOSITE side and settle into final position
-  const dir = side === "left" ? 1 : -1;
-  // Widen the activation window slightly so the transition feels less abrupt
-  const window = 0.11;
-  const start = Math.max(0, activeAt - window);
-  const end = Math.min(1, activeAt + window * 0.85);
 
-  // Multi-stop ranges + custom easing produce a smooth, organic reveal
-  // that ramps in gently as the S-curve approaches, then settles softly.
+  // Enter from the curve side, then settle into the card column.
+  const dir = side === "left" ? 1 : -1;
+  const revealWindow = TIMELINE_CARD_REVEAL_WINDOW;
+  const start = Math.max(0, activeAt - revealWindow);
+  const focus = activeAt - revealWindow * 0.18;
+  const end = Math.min(1, activeAt + revealWindow * 0.86);
+  const revealClip =
+    side === "left"
+      ? "inset(0% 0% 0% 18% round 1rem)"
+      : "inset(0% 18% 0% 0% round 1rem)";
+
   const opacity = useTransform(
     progress,
-    [start, activeAt - window * 0.2, activeAt + window * 0.3, end],
-    [reduce ? 1 : 0, reduce ? 1 : 0.6, 1, 1],
+    [start, focus, activeAt + revealWindow * 0.28, end],
+    [reduce ? 1 : 0.08, reduce ? 1 : 0.62, 1, 1],
     { ease: [easeOutExpo, easeOutExpo, easeOutExpo] },
   );
-  const x = useTransform(progress, [start, end], [reduce ? 0 : 64 * dir, 0], {
+  const x = useTransform(progress, [start, end], [reduce ? 0 : 46 * dir, 0], {
     ease: easeOutExpo,
   });
-  const y = useTransform(progress, [start, end], [reduce ? 0 : 20, 0], {
+  const y = useTransform(progress, [start, end], [reduce ? 0 : 18, 0], {
     ease: easeOutExpo,
   });
-  const scale = useTransform(progress, [start, end], [reduce ? 1 : 0.96, 1], {
-    ease: easeInOutQuint,
+  const scale = useTransform(progress, [start, end], [reduce ? 1 : 0.975, 1], {
+    ease: easeOutQuint,
   });
+  const clipPath = useTransform(
+    progress,
+    [start, focus, end],
+    [
+      reduce ? "inset(0% 0% 0% 0% round 1rem)" : revealClip,
+      "inset(0% 0% 0% 0% round 1rem)",
+      "inset(0% 0% 0% 0% round 1rem)",
+    ],
+    { ease: [easeOutExpo, easeOutQuint] },
+  );
+  const filter = useTransform(
+    progress,
+    [start, focus, end],
+    [
+      reduce ? "blur(0px) saturate(1)" : "blur(10px) saturate(0.84)",
+      reduce ? "blur(0px) saturate(1)" : "blur(2px) saturate(0.96)",
+      "blur(0px) saturate(1)",
+    ],
+    { ease: [easeOutExpo, easeOutQuint] },
+  );
+  const accentOpacity = useTransform(
+    progress,
+    [start, focus, end],
+    [reduce ? 0 : 0, reduce ? 0 : 0.42, 0],
+    { ease: [easeOutExpo, easeOutQuint] },
+  );
 
   return (
     <motion.article
-      style={{ opacity, x, y, scale }}
-      className="group border-border bg-card hover:border-premium/50 relative rounded-2xl border p-6 shadow-[0_1px_0_rgba(0,0,0,0.02)] transition-[border-color,box-shadow,transform] duration-500 hover:-translate-y-0.5 hover:shadow-[0_8px_8px_-8px_var(--premium-glow)] sm:p-8"
+      style={{ opacity, x, y, scale, clipPath, filter }}
+      className="group border-border bg-card hover:border-premium/50 relative overflow-hidden rounded-2xl border p-6 shadow-[0_1px_0_rgba(0,0,0,0.02)] transition-[border-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_8px_-8px_var(--premium-glow)] sm:p-8"
     >
-      <div className="flex items-baseline justify-between gap-4">
+      <motion.div
+        aria-hidden
+        style={{ opacity: accentOpacity }}
+        className={`pointer-events-none absolute inset-y-0 w-20 bg-[radial-gradient(circle_at_center,var(--premium-glow),transparent_68%)] blur-xl ${
+          side === "left" ? "-right-8" : "-left-8"
+        }`}
+      />
+
+      <div className="relative flex items-baseline justify-between gap-4">
         <span className="text-primary font-mono text-xs tracking-[0.18em]">
           {item.id}
         </span>
@@ -65,17 +103,19 @@ export function TimelineCard({
         </span>
       </div>
 
-      <h3 className="text-foreground mt-4 font-serif text-2xl leading-tight tracking-tight sm:text-[28px]">
+      <h3 className="text-foreground relative mt-4 font-serif text-2xl leading-tight tracking-tight sm:text-[28px]">
         {item.title}
       </h3>
-      <p className="text-muted-foreground mt-1.5 text-sm">{item.role}</p>
+      <p className="text-muted-foreground relative mt-1.5 text-sm">
+        {item.role}
+      </p>
 
-      <p className="text-foreground/75 mt-4 text-[15px] leading-relaxed">
+      <p className="text-foreground/75 relative mt-4 text-[15px] leading-relaxed">
         {item.description}
       </p>
 
       {item.tags && item.tags.length > 0 && (
-        <ul className="mt-5 flex flex-wrap gap-1.5">
+        <ul className="relative mt-5 flex flex-wrap gap-1.5">
           {item.tags.map((tag) => (
             <li
               key={tag}
