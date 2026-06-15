@@ -4,6 +4,30 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Mondwest";
+  src: url("/fonts/PPMondwest-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -28,32 +52,72 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-glow: var(--glow);
+  --color-accent-clay: var(--accent-clay);
+  --color-clay: var(--clay);
+  --font-display: "PP Mondwest", "PP Neue Montreal", serif;
+  --font-sans: "PP Neue Montreal", "Inter", "Geist", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
   --radius: 0.5rem;
-  --background: oklch(0.08 0.005 250);
-  --foreground: oklch(0.96 0.005 250);
-  --card: oklch(0.11 0.006 250);
-  --card-foreground: oklch(0.96 0.005 250);
-  --popover: oklch(0.11 0.006 250);
-  --popover-foreground: oklch(0.96 0.005 250);
-  --primary: oklch(0.96 0.005 250);
-  --primary-foreground: oklch(0.08 0.005 250);
-  --secondary: oklch(0.18 0.008 250);
-  --secondary-foreground: oklch(0.96 0.005 250);
-  --muted: oklch(0.16 0.006 250);
-  --muted-foreground: oklch(0.62 0.012 250);
+  --font-sans: "PP Neue Montreal", "Inter", "Geist", system-ui, sans-serif;
+  --font-display: "PP Mondwest", "PP Neue Montreal", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  color-scheme: dark;
+  --background: oklch(0.08 0.006 250);
+  --foreground: oklch(0.96 0.006 250);
+  --card: oklch(0.12 0.008 250 / 86%);
+  --card-foreground: oklch(0.96 0.006 250);
+  --popover: oklch(0.115 0.008 250 / 96%);
+  --popover-foreground: oklch(0.96 0.006 250);
+  --primary: oklch(0.96 0.006 250);
+  --primary-foreground: oklch(0.08 0.006 250);
+  --secondary: oklch(0.18 0.01 250);
+  --secondary-foreground: oklch(0.94 0.006 250);
+  --muted: oklch(0.16 0.008 250);
+  --muted-foreground: oklch(0.7 0.014 82);
   --accent: oklch(0.78 0.16 75);
-  --accent-foreground: oklch(0.08 0.005 250);
-  --destructive: oklch(0.6 0.22 25);
+  --accent-foreground: oklch(0.1 0.006 250);
+  --destructive: oklch(0.62 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.22 0.008 250 / 60%);
-  --input: oklch(0.22 0.008 250);
+  --border: oklch(0.96 0.006 250 / 14%);
+  --input: oklch(0.96 0.006 250 / 18%);
   --ring: oklch(0.78 0.16 75);
+  --glow: oklch(0.78 0.16 75 / 22%);
+  --accent-clay: var(--accent);
+  --clay: var(--accent);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --background: oklch(0.955 0.018 78);
+  --foreground: oklch(0.18 0.012 250);
+  --card: oklch(0.985 0.008 80 / 92%);
+  --card-foreground: oklch(0.18 0.012 250);
+  --popover: oklch(0.99 0.006 80 / 98%);
+  --popover-foreground: oklch(0.18 0.012 250);
+  --primary: oklch(0.18 0.012 250);
+  --primary-foreground: oklch(0.985 0.008 80);
+  --secondary: oklch(0.91 0.018 78);
+  --secondary-foreground: oklch(0.24 0.014 250);
+  --muted: oklch(0.89 0.016 78);
+  --muted-foreground: oklch(0.42 0.024 70);
+  --accent: oklch(0.66 0.145 68);
+  --accent-foreground: oklch(0.985 0.008 80);
+  --destructive: oklch(0.56 0.21 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.2 0.012 250 / 16%);
+  --input: oklch(0.2 0.012 250 / 18%);
+  --ring: oklch(0.66 0.145 68);
+  --glow: oklch(0.66 0.145 68 / 18%);
+  --accent-clay: var(--accent);
+  --clay: var(--accent);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 @layer base {
@@ -67,6 +131,26 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
   }
 
   ::selection {
@@ -98,7 +182,6 @@
 }
 
 @keyframes blink {
-
   0%,
   100% {
     opacity: 1;
@@ -114,9 +197,15 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
 
   .marquee-track,
-  .marquee-track-slow {
+  .marquee-track-slow,
+  .live-dot {
     animation: none;
   }
 }
