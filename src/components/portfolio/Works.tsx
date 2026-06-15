@@ -1,6 +1,11 @@
 "use client";
-import { motion } from "motion/react";
-import { useRef, useState } from "react";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from "motion/react";
+import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
 const projects = [
@@ -12,9 +17,25 @@ const projects = [
 
 export function Works() {
   const [hover, setHover] = useState<number | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const reduceMotion = useReducedMotion();
+  const previewX = useMotionValue(-400);
+  const previewY = useMotionValue(-260);
+  const springX = useSpring(previewX, {
+    stiffness: 260,
+    damping: 28,
+    mass: 0.45,
+  });
+  const springY = useSpring(previewY, {
+    stiffness: 260,
+    damping: 28,
+    mass: 0.45,
+  });
   const hoveredProject = hover === null ? null : (projects[hover] ?? null);
+
+  const movePreview = (event: React.PointerEvent<HTMLDivElement>) => {
+    previewX.set(event.clientX - 160);
+    previewY.set(event.clientY - 100);
+  };
 
   return (
     <section
@@ -37,32 +58,25 @@ export function Works() {
       </div>
 
       <div
-        ref={containerRef}
-        onMouseMove={(e) => {
-          const r = containerRef.current?.getBoundingClientRect();
-          if (!r) return;
-          setPos({ x: e.clientX - r.left, y: e.clientY - r.top });
-        }}
-        onMouseLeave={() => setHover(null)}
+        onPointerMove={movePreview}
+        onPointerLeave={() => setHover(null)}
         className="border-border relative border-t"
       >
         {/* Cursor-follow preview */}
         <motion.div
           aria-hidden
           animate={{
-            x: pos.x - 160,
-            y: pos.y - 100,
             opacity: hover !== null ? 1 : 0,
-            scale: hover !== null ? 1 : 0.85,
+            scale: hover !== null && !reduceMotion ? 1 : 0.96,
           }}
           transition={{
-            type: "spring",
-            stiffness: 220,
-            damping: 24,
-            mass: 0.5,
+            duration: reduceMotion ? 0 : 0.22,
+            ease: [0.16, 1, 0.3, 1],
           }}
-          className="pointer-events-none absolute top-0 left-0 z-20 hidden h-[200px] w-[320px] overflow-hidden rounded-lg md:block"
+          className="pointer-events-none fixed top-0 left-0 z-20 hidden h-[200px] w-[320px] overflow-hidden rounded-lg md:block"
           style={{
+            x: reduceMotion ? previewX : springX,
+            y: reduceMotion ? previewY : springY,
             background:
               hoveredProject !== null
                 ? "radial-gradient(circle at 24% 24%, color-mix(in oklab, var(--primary-violet) 76%, transparent), transparent 58%), radial-gradient(circle at 78% 76%, color-mix(in oklab, var(--premium) 64%, transparent), transparent 56%), linear-gradient(135deg, color-mix(in oklab, var(--primary-blue) 64%, var(--background)), var(--card))"
